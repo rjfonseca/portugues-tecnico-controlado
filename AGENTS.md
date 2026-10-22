@@ -101,6 +101,11 @@ PTC_TIMEOUT=600 ./init.sh          # timeout por chamada (default: 300s)
 PTC_ADVERSARIAL=1 ./init.sh --cobertura   # matriz só com contra-teste caso-adv-*
 ```
 
+Os gates grátis — `build.py --verificar`, `test_runner.py`, `--cobertura` e a
+matriz adversarial — rodam também no GitHub Actions (`.github/workflows/gates.yml`),
+em todo PR. O CI não tem o CLI do Claude, e por isso o `init.sh` só exige o
+`claude` fora do `--cobertura`. A suite paga continua local.
+
 `tests/test_runner.py` cobre o que os casos **não** alcançam: os quatro estados
 de `veredito()`, o filtro do `PTC_ADVERSARIAL`, o gate de legibilidade e a
 colisão léxico ↔ `SKILL.md`. Reproduzir um `ESCALOU` de verdade depende do
