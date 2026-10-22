@@ -1,0 +1,33 @@
+# Gates grátis: nenhum deles chama a API do Claude.
+# A suite paga (`./init.sh` sem argumento) continua na máquina de quem desenvolve;
+# ver AGENTS.md, "Verificação".
+name: gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dependências do harness
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install -r requirements.txt
+      - name: dist/ e docs/ em dia
+        run: .venv/bin/python3 tools/build.py --verificar
+      - name: Checks do runner
+        run: .venv/bin/python3 tests/test_runner.py
+      - name: Matriz de cobertura
+        run: ./init.sh --cobertura
+      - name: Matriz adversarial
+        run: PTC_ADVERSARIAL=1 ./init.sh --cobertura

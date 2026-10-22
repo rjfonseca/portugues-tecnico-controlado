@@ -386,7 +386,7 @@ As melhorias não vêm de "achar que já deu". Cada frente de trabalho é um arq
 | Loop | Critério de parada | Estado |
 |---|---|---|
 | `goal-cobertura.md` | `./init.sh --cobertura` sai 0 | fechado — 8/8 positivo, 8/8 contra-teste |
-| `goal-falso-positivo.md` | `PTC_ADVERSARIAL=1 ./init.sh --cobertura` sai 0 | aberto — 4/8 |
+| `goal-falso-positivo.md` | `PTC_ADVERSARIAL=1 ./init.sh --cobertura` sai 0 | fechado — 8/8, em 8 rodadas |
 
 O segundo existe porque o primeiro fechou com contra-testes escritos **junto com a regra**, pelo mesmo raciocínio que a regra usa. Todos testam a leitura legítima óbvia (`o serviço se reinicia` não é `-se` apassivador). Nenhum testa português correto que *se parece* com a violação — que é o modo de falha que mais escapa. O contra-teste adversarial parte de um texto bom e pergunta o que a regra pode confundir com erro.
 

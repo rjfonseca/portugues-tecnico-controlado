@@ -21,7 +21,12 @@ cd "$(dirname "$0")"
 if [ -x .venv/bin/python3 ]; then PY=.venv/bin/python3; else PY=python3; fi
 
 falta=0
-command -v claude >/dev/null || { echo "falta: claude (https://claude.com/claude-code)"; falta=1; }
+# `--cobertura` não chama a API, então não precisa do CLI. Exigir o `claude`
+# ali impedia o gate grátis de rodar em CI, onde o CLI não está instalado e
+# não deve estar: a suite paga roda na máquina de quem desenvolve.
+if [[ " $* " != *" --cobertura "* ]]; then
+  command -v claude >/dev/null || { echo "falta: claude (https://claude.com/claude-code)"; falta=1; }
+fi
 command -v "$PY"  >/dev/null || { echo "falta: python3"; falta=1; }
 # Checado sempre, não só na rodada completa: é fronteira de custo. Descobrir a
 # dependência ausente depois de gastar 14 chamadas de API é o desperdício que
