@@ -50,6 +50,8 @@ A regra número um, porque em português a 3ª pessoa do singular colapsa `ele`/
 
 Argumento extra para banir o `-se`: ele colide com o `se` condicional na mesma frase.
 
+**Fronteira: rótulo não é oração.** Título de seção ou de tarefa, resumo de alerta, item de checklist e célula de tabela são sintagma nominal. Sem verbo finito não há oração finita, e a PTC-1 não tem sujeito para exigir. Não transforme rótulo em frase (`A fila tem...`, `Existem testes...`) e não cite PTC-1 para ele.
+
 ### PTC-2 — Uma proposição por frase, uma forma verbal
 
 - **Instrução ao leitor:** imperativo na forma "você" (`Clique`, `Faça`, `Vá`). Proibido `tu` (`Clica`), infinitivo (`Clicar em Salvar`), `deve-se`, `por favor`, `poderia`.

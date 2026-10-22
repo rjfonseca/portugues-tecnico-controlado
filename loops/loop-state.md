@@ -9,7 +9,7 @@ começar a próxima. As seções estão em ordem cronológica; a última é a at
 - **Objetivo fechado:** `loops/goal-falso-positivo.md` — adversarial 8/8 ✓ em
   2026-08-16, depois de 8 rodadas e **zero achado de falso positivo**
 - **Objetivo fechado:** `loops/goal-cobertura.md` — positivo 8/8 ✓ · contra-teste 8/8 ✓ em 2026-08-02
-- **Suite:** 22 casos (2026-08-16) — 22/22, 1 instável (`caso-01`)
+- **Suite:** 24 casos (2026-10-22) — ver "Sessão seguinte — PTC-1, rótulo e docstring"
 - **Legibilidade:** 4ª asserção. Limiares calibrados: `caso-01` `flesch-min: 50`,
   `caso-11` `flesch-min: 68`, `caso-13` `pal-frase-max: 12` (este em observação —
   margem 1,3 contra espalhamento de 6,1). `caso-03` e `caso-12` foram reprovados
@@ -1065,3 +1065,51 @@ remedir.** `sem resposta do modelo` é infra e não gera conserto nenhum;
 regra antiga ("flaky que não reproduz isolado 5/5 é infra") continua certa, mas
 virou o segundo passo — antes ela era o único, e custava 5 chamadas para
 responder o que agora está na tela.
+
+## Sessão seguinte — PTC-1, rótulo e docstring (2026-10-22)
+
+Evidência de partida: num teste com textos reais, a PTC-1 disparou em coisas
+que não são oração — título de seção e de tarefa, resumo de alerta, item de
+checklist — e havia uma contradição textual entre a PTC-1 ("sujeito lexical em
+toda oração finita") e a PTC-2, que prescreve `Retorna a lista de pedidos
+abertos.` sem sujeito para docstring e tool description. Pela doutrina, medir
+antes de consertar.
+
+Medição com o mesmo caminho do `verify.py` (`rodar` + `avaliar`), equivalente a
+`PTC_TENTATIVAS=1 PTC_MODELO_ESCALA=`, `sonnet`, saída bruta guardada:
+
+| Caso | Antes | Depois | O que saiu errado antes |
+|---|---|---|---|
+| `caso-16` v1 (com `Título da tarefa: Corrige a falha...`) | 0/5 | — | `Corrige` → `Corrija` em **5/5**, citado como **PTC-2**; em 1/5 também os 3 rótulos nominais viraram frase, citados como PTC-1 |
+| `caso-16` final (título nominal) | **3/5** | **5/5** | 2/5 com `Existem testes de aceitação...`, `A mensagem de erro contém...`, `A fila de pagamentos tem...` — todos citados `PTC-1 (frase sem verbo finito e sem sujeito)` |
+| `caso-17` (docstring, godoc, tool description + `faz-se` real) | **5/5** | **5/5** | nada: as 5 saídas justificam o sujeito implícito pela própria PTC-2, e o `faz-se` foi pego 5/5 como PTC-1 |
+
+### 1. Rótulo — oscilava, virou conserto
+
+Cláusula "Fronteira: rótulo não é oração" no corpo da PTC-1, com ❌/✅. 3/5 →
+5/5 (as 5 depois foram em duas levas, 2 + 3, porque a primeira bateu limite de
+sessão — os 3 "sem resposta" não contam como amostra).
+
+### 2. Docstring — contradição textual sem oscilação
+
+`caso-17` deu 5/5 **antes** de qualquer mudança. A contradição PTC-1 × PTC-2
+continua escrita e **não foi consertada**: mesma família de `talvez` e da
+expansão de sigla. O caso fica como regressão — se um dia a docstring passar a
+ganhar `A função retorna...`, é ele que pega. Ruído observado e não asserido:
+em 2/5 a PTC-6 trocou `devolve` por `retorna` no comentário Go (unificação de
+termo entre blocos); a âncora `// ParseConfig lê` não depende disso.
+
+### Pendências — PTC-2, outra sessão
+
+- **Título com verbo na 3ª pessoa** (`Corrige a falha na exportação`): a skill
+  lê como imperativo de `tu` e troca por `Corrija` 5/5, citando PTC-2. É a
+  fronteira da forma verbal fixa em rótulo; ficou fora do `caso-16` para não
+  misturar regras. A entrada v1 está no comentário do caso.
+- **Gerúndio adjetivo em rótulo** (`Testes de aceitação cobrindo os erros 400
+  e 403`) e limite de palavras em rótulo: não medidos; terreno da PTC-2/PTC-5.
+
+### Suite completa
+
+`./init.sh`: **24/24, exit 0**, 1 `ESCALOU` (`caso-14-contra-lexico`, PTC-6 —
+falhou em sonnet e passou em opus; fora do terreno desta mudança, não remedido
+para poupar chamadas). `caso-16` e `caso-17` em `PASS` de primeira.
