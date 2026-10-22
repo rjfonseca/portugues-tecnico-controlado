@@ -242,6 +242,8 @@ PTC-1, PTC-7 e PTC-8 **nunca relaxam**. Em comunicado, `o mesmo foi cancelado` e
 
 Uma exceção dentro da PTC-1: o `-se` apassivador é proibido só em `estrito`. Em documentação de sistema, `Verifica-se a integridade dos arquivos` fica, a mesma licença que `descritivo` dá à voz passiva sem ator. Explicitar um ator que o texto não tem é inventar fato.
 
+E uma fronteira: rótulo não é oração. Título de seção ou de tarefa, resumo de alerta, item de checklist e célula de tabela ficam como estão. `- [ ] Testes de aceitação para o erro 400` não vira `Os testes de aceitação cobrem o erro 400.`, porque sem verbo finito não há sujeito a exigir.
+
 O resto sai em `leve`. O léxico controlado fica dispensado e a primeira pessoa passa a ser desejável.
 
 ### Flag `destinatário: agente`
