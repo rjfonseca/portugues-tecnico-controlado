@@ -1057,6 +1057,25 @@ Hipóteses para o relato não reproduzido, nenhuma medida: modelo diferente do
 usuário pedindo "português" explicitamente. Quem reabrir isto traga a entrada
 que falhou — sem ela, a sonda é chute.
 
+## Sessão seguinte — fronteira da PTC-7 com o código (2026-10-22/23)
+
+Cláusula "Fronteira com o código" na PTC-7: número em prosa corrige, literal
+que o leitor copia para a ferramenta (config, PromQL/SQL, flag de CLI,
+unidade de linguagem `5m`) fica intacto. `%` colado deixa de ser marcado.
+Caso novo: `caso-15-contra-ptc7-literal-codigo` (positivo `1.5 GB` e
+literais na mesma entrada).
+
+### Medido — `PTC_TENTATIVAS=1`, sonnet, 2026-10-23
+
+| Caso | Resultado |
+|---|---|
+| `caso-15` | **5/5** |
+| `caso-09` (contra-teste PTC-7 antigo) | 1/1 |
+
+`./init.sh` completo: 23/23, exit 0. `caso-11` FLAKY (âncora `O agente envia
+o pacote`, PTC-1), `caso-adv-6` FLAKY (`uso de CPU`, `resposta HTTP`, PTC-6) e
+`caso-14` ESCALOU (PTC-6, igual à rodada da PTC-1). Nenhum toca a PTC-7.
+
 ## Sessão seguinte — armadilhas, PTC-9 e o link no topo (2026-10-24)
 
 Três pedidos numa sessão, em três commits separados na branch
