@@ -1010,6 +1010,51 @@ sem ele. As duas mutações já tinham rodado, mas o código teve de ser reescri
 **Verificação por mutação sobre trabalho não commitado restaura de cópia, não do
 git.**
 
+## Sessão seguinte — jargão congelado pelo glossário (PTC-6, 2026-10-22)
+
+**Suspeita de origem:** num teste em documentação técnica real, o léxico
+evite→use (`performance` → `desempenho`, `deployar`, `rodar`, `checar`) teria
+generalizado para jargão que quem desenvolve usa como termo — `overhead`,
+`lock`, `label`, `pod`, `rate limit`, `issue`, `circuit breaker`. A PTC-6 diz
+"um conceito, um termo", mas nada no texto dizia que o glossário do projeto
+**vence** o evite→use, onde procurar o glossário, nem o que fazer sem ele.
+
+Caso escrito antes de mexer na regra: `caso-18-contra-ptc6-jargao-congelado`,
+`descritivo`, com um glossário colado no topo da entrada (o parser não precisa
+de chave nova — tudo depois do marcador é entrada). O glossário congela
+`deploy`, `pod`, `label`, `lock`, `rate limit` e `performance` — este último
+também na coluna "Evite", que é o conflito direto. `namespace` fica fora do
+glossário de propósito. O lado positivo é `seta` → `definir`, ancorado por
+`deve-conter: defin` (a coluna do glossário se chama "Significado" para a
+âncora não casar no eco).
+
+### Medido — `PTC_TENTATIVAS=1`, sem escalada, sonnet, skill de `main`
+
+| Sonda | Nível | Glossário | Resultado |
+|---|---|---|---|
+| `caso-18` (commitado) | descritivo | colado | **5/5** |
+| sem glossário, 9 jargões + `seta` | descritivo | nenhum | **5/5** |
+| runbook com `performance`, `cheque`, `deployar`, `Sete` ao lado de `lock`, `pods`, `label`, `rate limit`, `overhead`, `circuit breaker`, `issue`, `bucket` | estrito | nenhum | **5/5** (1ª tentativa perdida inteira para limite de sessão — `sem resposta` 5×, refeita) |
+
+Nas 15 saídas a gíria saiu trocada (`desempenho`, `verifique`, `implantar`,
+`Defina`) e o jargão de plataforma ficou; o "Mantido de propósito" o lista
+como termo de domínio. Com glossário, a saída cita a precedência por conta
+própria ("Aqui vale o glossário do projeto").
+
+### Decisão — a regra não mudou
+
+Contradição textual não é achado — oscilação é. Zero de 15 não reproduz o
+relato, então `SKILL.md` e `lexico.md` ficaram como estavam. Um rascunho da
+mudança (bullet de precedência e de fallback sem glossário na PTC-6, seção
+"Precedência sobre o evite→use" no léxico) passou no `teste_colisao_lexico_skill`
+e foi descartado sem medir. `caso-18` entra como **regressão**: se uma palavra
+nova no léxico reabrir a generalização, ele quebra.
+
+Hipóteses para o relato não reproduzido, nenhuma medida: modelo diferente do
+`sonnet`; texto longo, em que a pressão do léxico se acumula; ou instrução do
+usuário pedindo "português" explicitamente. Quem reabrir isto traga a entrada
+que falhou — sem ela, a sonda é chute.
+
 ## Como retomar
 
 Instale o harness uma vez — ele deixou de ser stdlib puro:
