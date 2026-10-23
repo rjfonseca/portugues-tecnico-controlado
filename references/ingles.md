@@ -84,12 +84,13 @@ Copiar literalmente:
 - flags de CLI e parâmetros
 - strings de log e códigos de erro
 - nomes de arquivo e de caminho
+- valor literal de código — chave/valor de configuração, expressão de consulta, unidade de linguagem (`5m`, `300m`) — inclusive o ponto decimal. Ver PTC-7, "Fronteira com o código"
 
 **Rótulo de interface:** use o rótulo real do produto localizado. Nunca invente tradução. Se o produto não é localizado, mantenha em inglês e não flexione.
 
 ## O que não se copia
 
-Único lugar onde copiar é **errado** — ver PTC-7:
+Único lugar onde copiar é **errado** — ver PTC-7. Vale para número em prosa; literal de código copia sempre:
 
 | | PT-BR | EN |
 |---|---|---|

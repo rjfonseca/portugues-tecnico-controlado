@@ -195,7 +195,7 @@ PTC-1 a PTC-5 tratam de **desambiguação** e exigem julgamento. PTC-6 a PTC-8 t
 | **PTC-4** | Verbo pleno, não verbo-suporte | `realizar a validação` → `validar`. |
 | **PTC-5** | Sintaxe plana | Adjetivo pós-nominal. Cadeia de `de` ≤ 2. Nada entre verbo e objeto. |
 | **PTC-6** | Termos congelados, variante BR | Um conceito, um termo. Fixa o português brasileiro. |
-| **PTC-7** | Formato de número, data e unidade | Vírgula decimal em PT. Datas em ISO 8601 nos dois idiomas. |
+| **PTC-7** | Formato de número, data e unidade | Vírgula decimal em PT. Datas em ISO 8601 nos dois idiomas. Vale para número em prosa: literal de código (`threshold: 0.3`, `[5m]`, `--timeout=30s`) fica intacto. |
 | **PTC-8** | Ortografia PT-BR vigente | Acordo de 1990, obrigatório no Brasil desde 2016-01-01. |
 
 Três delas, em uma linha cada:
@@ -282,6 +282,7 @@ Falha quando uma célula existe numa versão e não na outra, quando a contagem 
 - **Não entrega documentação aeroespacial certificada em STE.** Para isso, o padrão oficial é a fonte de verdade.
 - **Não marca variante de português europeu como erro.** `utilizador`, `ecrã` e `ficheiro` estão corretos em PT-PT. A skill *fixa* a variante brasileira por consistência de projeto.
 - **Não trata convenção de estilo como norma.** `front-end`/`frontend` e `data center`/`datacenter` são empréstimos que o VOLP não hifeniza. A skill documenta a escolha em vez de apontar erro.
+- **Não reformata valor literal de código.** Chave de configuração, expressão PromQL/SQL, flag de CLI e unidade de linguagem (`5m`, `300m`) mantêm ponto decimal e unidade colada: o leitor copia o valor para a ferramenta, e `0,3` ou `5 min` ali é dado errado. O mesmo vale para `13%` colado, que é convenção e não erro.
 - **Não simplifica texto criativo ou persuasivo.** Copy de marketing perde o que importa sob linguagem controlada.
 - **Não corta condição de segurança nem qualificador de escopo para encurtar frase.** Sinaliza o custo em vez disso.
 

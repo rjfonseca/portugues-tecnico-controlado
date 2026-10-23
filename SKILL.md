@@ -147,7 +147,13 @@ Aqui o erro não é de estilo, é **dado errado**.
 - **Data: ISO 8601 (`2026-08-02`) nos dois idiomas.** `02/08/2026` é 2 de agosto em PT e 8 de fevereiro em EN. Se o contexto exigir extenso, escreva o mês por nome.
 - **Hora:** 24 h, `14h30`. Nunca `2:30 PM` em PT.
 - **Unidade:** espaço entre número e símbolo (`10 MB`, `200 ms`); símbolo nunca traduzido nem pluralizado (`5 kg`, não `5 kgs`).
+- **Porcentagem:** `13%` colado e `13 %` com espaço são convenção de estilo, não dado errado — as duas formas têm uma leitura só. Não marque nenhuma das duas. O espaço da linha acima vale para símbolo de unidade (`MB`, `ms`, `kg`), não para `%`.
 - **Intervalo:** `de 10 a 20`, nunca `10-20` (colide com sinal de menos).
+
+**Fronteira com o código.** A PTC-7 vale para número **em prosa**. Valor que o leitor copia para uma ferramenta fica intacto — ponto decimal, unidade colada e grafia original: code span, bloco de código, flag de CLI (`--timeout=30s`), chave/valor de configuração (`threshold: 0.3`), expressão de consulta (PromQL, SQL) e unidade de linguagem de programação (`5m`, `30s`, `300m`). Ali o formato é da ferramenta, não do português: `threshold: 0,3` é outro valor, `[5 min]` não parseia, e trocar isso produz o dado errado que esta regra existe para evitar. É o mesmo critério de `references/ingles.md`, "O que não se traduz". A fronteira não relaxa a regra: o número em prosa da mesma frase continua corrigido.
+
+> ❌ O alerta dispara quando `rate(http_requests_total[5 min])` passa de `threshold: 0,3`, e o pod reserva 1.5 GB. *(o leitor cola um valor que a ferramenta rejeita)*
+> ✅ O alerta dispara quando `rate(http_requests_total[5m])` passa de `threshold: 0.3`, e o pod reserva 1,5 GB. *(literal intacto, prosa corrigida)*
 
 ### PTC-8 — Ortografia PT-BR vigente
 
